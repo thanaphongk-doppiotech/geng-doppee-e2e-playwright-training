@@ -1,6 +1,7 @@
 import { test } from '../src/fixtures/app.fixtures';
 import testData from '../src/data/testdata/assignment_001.json';
 import { testAddress } from '../src/data/testdata/assignment_001';
+import { convertCurrencyToNumber, convertNumberToCurrency } from '../src/utils/CommonUtils';
 
 test.describe('assignment_001', () => {
 
@@ -43,11 +44,13 @@ test.describe('assignment_001', () => {
         // 12.	Retrieve the product name.
         const keyboardProductName = await productDetailPage.getProductName();
         // 13.	Retrieve the product price.
-        const keyboardProductPrice = await productDetailPage.getProductTotalPrice();
+        // const keyboardProductPrice = await productDetailPage.getProductTotalPrice();
         // 14.	Retrieve the product quantity.
-        const keyboardProductQty = await productDetailPage.getProductQuantity();
+        // const keyboardProductQty = await productDetailPage.getProductQuantity();
         // 15.	Increase product quantity to 5
         await productDetailService.increaseQuantity(testData.product.keyboard.qty);
+        const keyboardProductQty = await productDetailPage.getProductQuantity();
+        const keyboardProductPrice = await productDetailPage.getProductTotalPrice();
         // 16.	Select a color (if required).
         await productDetailPage.selectColorByColorName(translations.product_detail_page.product.attribute.color.silver);
         // 17.	Click Add to Cart.
@@ -67,8 +70,8 @@ test.describe('assignment_001', () => {
         await cartPage.verifyProductPriceIsMatch(earbudProductName, earbudProductPrice);
         await cartPage.verifyProductPriceIsMatch(keyboardProductName, keyboardProductPrice);
         // 23.	Verify the total price.
-        const totalPrice = Number(earbudProductPrice) + Number(keyboardProductPrice);
-        await cartPage.verifyTotalPriceIsMatch(String(totalPrice));
+        const totalPrice = convertCurrencyToNumber(earbudProductPrice) + convertCurrencyToNumber(keyboardProductPrice);
+        await cartPage.verifyTotalPriceIsMatch(convertNumberToCurrency(totalPrice));
         // 24.	Click “Proceed to Checkout.”
         await cartPage.clickCheckoutButton();
         // 25.	Fill in the delivery address.

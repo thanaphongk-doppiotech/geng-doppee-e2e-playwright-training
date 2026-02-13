@@ -46,16 +46,28 @@ export class CheckoutPage extends BasePage {
         await this.txtAddressDetail.fill(addressDetail);
     }
 
-    async selectProvinceByIndex(index: number = 0) {
-        await this.ddlProvince.selectOption({ index });
+    async selectProvinceByIndex(index: number = 1) {
+        await this.ddlProvince.selectOption({ index: index });
     }
 
-    async selectDistrictByIndex(index: number = 0) {
-        await this.ddlDistrict.selectOption({ index });
+    async selectProvinceByName(proviceName: string) {
+        await this.ddlProvince.selectOption({ label: proviceName });
     }
 
-    async selectSubDistrict(index: number = 0) {
-        await this.ddlSubDistrict.selectOption({ index });
+    async selectDistrictByIndex(index: number = 1) {
+        await this.ddlDistrict.selectOption({ index: index });
+    }
+
+    async selectDistrictByName(districtName: string) {
+        await this.ddlDistrict.selectOption({ label: districtName });
+    }
+
+    async selectSubDistrictByIndex(index: number = 1) {
+        await this.ddlSubDistrict.selectOption({ index: index });
+    }
+
+    async selectSubDistrictByName(subDistrictName: string) {
+        await this.ddlSubDistrict.selectOption({ label: subDistrictName });
     }
 
     async clickSaveAddressButton() {
@@ -63,7 +75,7 @@ export class CheckoutPage extends BasePage {
     }
 
     async selectQrCodePayment() {
-        await this.chkQrCodePay.click();
+        await this.chkQrCodePay.check();
     }
 
     async clickPlaceOrderButton() {

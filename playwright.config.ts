@@ -33,7 +33,7 @@ export default defineConfig({
     trace: 'on-first-retry',
 
     launchOptions: {
-      slowMo: 500, // Delays all Playwright operations in milliseconds
+      slowMo: 250, // Delays all Playwright operations in milliseconds
     },
     baseURL: process.env.LOCAL_URL,
   },

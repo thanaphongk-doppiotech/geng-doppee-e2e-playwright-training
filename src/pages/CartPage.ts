@@ -30,11 +30,12 @@ export class CartPage extends BasePage {
     }
 
     async verifyProductPriceIsMatch(name: string, price: string) {
-        await expect(this.txtProductPrice(name)).toContainText(price);
+        // FIXME
+        await expect.soft(this.txtProductPrice(name)).toContainText(price);
     }
 
     async verifyTotalPriceIsMatch(price: string) {
-        await expect(this.txtTotalPrice).toContainText(price);
+        await expect.soft(this.txtTotalPrice).toContainText(price);
     }
 
     async clickCheckoutButton() {

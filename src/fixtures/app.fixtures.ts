@@ -18,6 +18,7 @@ import { CheckoutService } from '../services/CheckoutService';
 
 // Utils
 import * as randomUtils from '../utils/RandomUtils';
+import * as commonUtils from '../utils/CommonUtils';
 
 // Translation
 import { en, th, Translation } from '../data/translations/translation';
@@ -92,6 +93,7 @@ export class App {
 type Fixtures = {
     app: App;
     utils: typeof randomUtils;
+    commonUtils: typeof commonUtils;
     translations: Translation;
 }
 
@@ -101,6 +103,9 @@ export const test = base.extend<Fixtures>({
     },
     utils: async ({ }, use) => {
         await use(randomUtils);
+    },
+    commonUtils: async ({ }, use) => {
+        await use(commonUtils);
     },
     translations: async ({ }, use) => {
         await use(en);

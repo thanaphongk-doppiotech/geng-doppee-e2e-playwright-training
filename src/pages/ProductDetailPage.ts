@@ -13,17 +13,20 @@ export class ProductDetailPage extends BasePage {
 
     constructor(readonly page: Page, readonly translations: Translation) {
         super(page, translations);
-        this.txtProductName = page.locator('//h1[@data-testid="productdetail-title"]/text()');
-        this.txtProductTotalPrice = page.getByTestId(`//span[contains(text(), "${this.translations.product_detail_page.lbl_total}")]/following-sibling::span`);
-        this.txtProductQuantity = page.getByTestId('productdetail-pricepd-qty-input');
+        this.txtProductName = page.getByTestId('productdetail-title');
+        this.txtProductTotalPrice = page.locator(`//span[contains(text(), "${this.translations.product_detail_page.lbl_total}")]/following-sibling::span`);
+        this.txtProductQuantity = page.getByTestId('pd-qty-input');
         this.btnAddToCart = page.getByTestId('pd-add-to-cart');
-        this.btnBackToProduct = page.getByRole('link', { name: `${this.translations.product_detail_page.lbl_back_to_product}`, exact: true });
+        this.btnBackToProduct = page.locator(`//a[@href="/products" and contains(text(), "${this.translations.product_detail_page.lbl_back_to_product}")]`);
+        // FIXME
+        // - getByRole not work?
+        // // this.btnBackToProduct = page.getByRole('link', { name: `${this.translations.product_detail_page.lbl_back_to_product}`, exact: false });
         this.btnIncreaseQuantity = page.getByTestId('pd-qty-inc');
     }
 
     async getProductName() {
-        const productName = await this.txtProductName.textContent();
-        return String(productName?.trim());
+        const productName = await this.txtProductName.evaluate(el => el.firstChild?.textContent?.trim());
+        return String(productName);
     }
 
     async getProductTotalPrice() {

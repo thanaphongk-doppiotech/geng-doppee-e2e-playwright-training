@@ -6,11 +6,17 @@ export class CheckoutService {
 
     async createNewAddress(addressData: AddressData) {
         const { checkoutPage } = this.app;
+        checkoutPage.clickAddNewAddress();
+        await checkoutPage.page.waitForTimeout(500);
         checkoutPage.inputFirstName(addressData.firstName);
+        await checkoutPage.page.waitForTimeout(500);
         checkoutPage.inputLastName(addressData.lastName);
+        await checkoutPage.page.waitForTimeout(500);
         checkoutPage.inputAddressDetail(addressData.addressDetails);
-        checkoutPage.selectProvinceByIndex(addressData.proviceId);
-        checkoutPage.selectSubDistrict(addressData.districtId);
-        checkoutPage.selectSubDistrict(addressData.subDistrictId);
+        checkoutPage.selectProvinceByName(addressData.proviceName!);
+        checkoutPage.selectDistrictByIndex(addressData.districtId);
+        checkoutPage.selectSubDistrictByIndex(addressData.subDistrictId);
+        checkoutPage.clickSaveAddressButton();
+        await checkoutPage.page.waitForTimeout(500);
     }
 }
