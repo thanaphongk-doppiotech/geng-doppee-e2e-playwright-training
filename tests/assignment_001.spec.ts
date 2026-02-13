@@ -1,5 +1,6 @@
 import { test } from '../src/fixtures/app.fixtures';
-import testData from '../src/data/testdata/assignment_001.json'
+import testData from '../src/data/testdata/assignment_001.json';
+import { testAddress } from '../src/data/testdata/assignment_001';
 
 test.describe('assignment_001', () => {
 
@@ -9,7 +10,7 @@ test.describe('assignment_001', () => {
 
     test('Verify new register customer can be purchase product successfully', async ({ app, utils, translations }) => {
         // prepare test data
-        const { menuBarPage, signUpService, productListPage, productDetailPage, productDetailService, notificationPage } = app;
+        const { menuBarPage, signUpService, productListPage, productDetailPage, productDetailService, notificationPage, cartPage, checkoutPage, checkoutService, orderConfirmPage } = app;
         const { full_name, password } = testData.user;
         const email = utils.getRandomEmail();
         const mobilePhone = utils.getRandomMobileNumber();
@@ -56,14 +57,29 @@ test.describe('assignment_001', () => {
         // 19.	Open the mini cart.
         await menuBarPage.clickCartButton();
         // 20.	Select a product using the checkbox.
+        await cartPage.clickSelectAllCheckbox();
         // 21.	Verify the product name.
+        await cartPage.verifyProductIsAdded(earbudProductName);
+        await cartPage.verifyProductIsAdded(keyboardProductName);
+        await cartPage.verifyProductQuantityIsMatch(earbudProductName, earbudProductQty);
+        await cartPage.verifyProductQuantityIsMatch(keyboardProductName, keyboardProductQty);
         // 22.	Verify the product price.
+        await cartPage.verifyProductPriceIsMatch(earbudProductName, earbudProductPrice);
+        await cartPage.verifyProductPriceIsMatch(keyboardProductName, keyboardProductPrice);
         // 23.	Verify the total price.
+        const totalPrice = Number(earbudProductPrice) + Number(keyboardProductPrice);
+        await cartPage.verifyTotalPriceIsMatch(String(totalPrice));
         // 24.	Click “Proceed to Checkout.”
+        await cartPage.clickCheckoutButton();
         // 25.	Fill in the delivery address.
+        await checkoutService.createNewAddress(testAddress);
         // 26.	Select QR Code as the payment method.
+        await checkoutPage.selectQrCodePayment();
+        await checkoutPage.clickPlaceOrderButton();
         // 27.	Click “I have paid.”
+        await orderConfirmPage.clickPaidButton();
         // 28.	Verify that Payment Success is displayed.
+        await notificationPage.verifyPaymentSuccess();
         // await app.page.pause();
     })
 

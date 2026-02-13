@@ -1,9 +1,7 @@
 import { App } from "../fixtures/app.fixtures";
 
 export class SignUpService {
-    constructor(private readonly app: App) {
-
-    }
+    constructor(private readonly app: App) { }
 
     async registerWithGenerateEmail(name: string, mobilePhone: string, email: string, password: string, confirmPassword: string) {
         const { menuBarPage, loginPage, signUpPage } = this.app;
@@ -18,5 +16,4 @@ export class SignUpService {
         await signUpPage.inputConfirmPassword(confirmPassword);
         await signUpPage.clickCreateAccountButton();
     }
-
 }

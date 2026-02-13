@@ -7,10 +7,14 @@ import { SignUpPage } from '../pages/SignUpPage';
 import { ProductListPage } from '../pages/ProductListPage';
 import { ProductDetailPage } from '../pages/ProductDetailPage';
 import { NotificationPage } from '../pages/NotificationPage'
+import { CartPage } from '../pages/CartPage';
+import { CheckoutPage } from '../pages/CheckoutPage';
+import { OrderConfirmPage } from '../pages/OrderConfirmPage';
 
 // Services
 import { SignUpService } from '../services/SignUpService';
 import { ProductDetailService } from '../services/ProductDetailService';
+import { CheckoutService } from '../services/CheckoutService';
 
 // Utils
 import * as randomUtils from '../utils/RandomUtils';
@@ -25,9 +29,13 @@ export class App {
     private _productListPage?: ProductListPage;
     private _productDetailPage?: ProductDetailPage;
     private _notificationPage?: NotificationPage;
+    private _cartPage?: CartPage;
+    private _checkoutPage?: CheckoutPage;
+    private _orderConfirmPage?: OrderConfirmPage;
 
     private _signupService?: SignUpService;
     private _productDetailService?: ProductDetailService;
+    private _checkoutService?: CheckoutService;
 
     constructor(readonly page: Page, readonly translations: Translation) {
     }
@@ -56,12 +64,28 @@ export class App {
         return this._notificationPage ??= new NotificationPage(this.page, this.translations);
     }
 
+    get cartPage(): CartPage {
+        return this._cartPage ??= new CartPage(this.page, this.translations);
+    }
+
+    get checkoutPage(): CheckoutPage {
+        return this._checkoutPage ??= new CheckoutPage(this.page, this.translations);
+    }
+
+    get orderConfirmPage(): OrderConfirmPage {
+        return this._orderConfirmPage ??= new OrderConfirmPage(this.page, this.translations);
+    }
+
     get signUpService(): SignUpService {
         return this._signupService ??= new SignUpService(this);
     }
 
     get productDetailService(): ProductDetailService {
         return this._productDetailService ??= new ProductDetailService(this);
+    }
+
+    get checkoutService(): CheckoutService {
+        return this._checkoutService ??= new CheckoutService(this);
     }
 }
 

@@ -6,6 +6,7 @@ export class ProductListPage extends BasePage {
     private readonly ddlCategory: Locator;
     private readonly btnApply: Locator;
     private readonly txtSearch: Locator;
+    private readonly btnViewDetailByName = (productName: string): Locator => this.page.locator(`//a[contains(text(), "${productName}")]/parent::div/following-sibling::div/button`);
 
     constructor(readonly page: Page, readonly translations: Translation) {
         super(page, translations);
@@ -23,9 +24,9 @@ export class ProductListPage extends BasePage {
     }
 
     async clickViewDetailsByProductName(productName: string) {
-        const lnkProduct = this.page.locator(`//a[contains(text(), "${productName}")]/parent::div/following-sibling::div/button`);
-        lnkProduct.hover();
-        lnkProduct.click();
+        const btnViewDetail = this.btnViewDetailByName(productName);
+        btnViewDetail.hover();
+        btnViewDetail.click();
     }
 
     async inputSearch(text: string) {

@@ -25,11 +25,15 @@
         }
     },
     "cart_page": {
-        "lbl_select_all": "Select all"
+        "lbl_select_all": "Select all",
+        "lbl_total": "Total"
     },
     "notification_page": {
         "add_to_cart_success": {
             "msg": "Added to cart"
+        },
+        "payment_success": {
+            "msg": "Payment successful"
         }
     }
 }

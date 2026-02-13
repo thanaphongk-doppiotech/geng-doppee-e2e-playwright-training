@@ -9,6 +9,7 @@ export class ProductDetailPage extends BasePage {
     private readonly btnAddToCart: Locator;
     private readonly btnBackToProduct: Locator;
     private readonly btnIncreaseQuantity: Locator;
+    private readonly btnColorAttributeByName = (name: string): Locator => this.page.locator(`//label[text()="${this.translations.product_detail_page.product.attribute.color.name}"]/parent::div//button[text()="${name}"]`);
 
     constructor(readonly page: Page, readonly translations: Translation) {
         super(page, translations);
@@ -28,16 +29,16 @@ export class ProductDetailPage extends BasePage {
     async getProductTotalPrice() {
         const priceText = await this.txtProductTotalPrice.innerText();
         const price = priceText.replace(`${this.translations.product_detail_page.product.price.currency}`, '').trim();
-        return Number(price);
+        return price;
     }
 
     async getProductQuantity() {
         const qty = await this.txtProductQuantity.inputValue();
-        return Number(qty);
+        return qty;
     }
 
     async selectColorByColorName(name: string) {
-        await this.page.locator(`//label[text()="${this.translations.product_detail_page.product.attribute.color.name}"]/parent::div//button[text()="${name}"]`).click();
+        await this.btnColorAttributeByName(name).click();
     }
 
     async clickAddToCartButton() {
