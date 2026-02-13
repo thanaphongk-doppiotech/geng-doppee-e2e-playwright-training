@@ -80,7 +80,6 @@ test.describe('assignment_001', () => {
         await orderConfirmPage.clickPaidButton();
         // 28.	Verify that Payment Success is displayed.
         await notificationPage.verifyPaymentSuccess();
-        // await app.page.pause();
     })
 
 })
