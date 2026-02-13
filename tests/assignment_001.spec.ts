@@ -1,7 +1,6 @@
 import { test } from '../src/fixtures/app.fixtures';
 import testData from '../src/data/testdata/assignment_001.json';
 import { testAddress } from '../src/data/testdata/assignment_001';
-import { convertCurrencyToNumber, convertNumberToCurrency } from '../src/utils/CommonUtils';
 
 test.describe('assignment_001', () => {
 
@@ -9,7 +8,7 @@ test.describe('assignment_001', () => {
         await app.page.goto('/')
     })
 
-    test('Verify new register customer can be purchase product successfully', async ({ app, utils, translations }) => {
+    test('Verify new register customer can be purchase product successfully', async ({ app, utils, translations, commonUtils }) => {
         // prepare test data
         const { menuBarPage, signUpService, productListPage, productDetailPage, productDetailService, notificationPage, cartPage, checkoutPage, checkoutService, orderConfirmPage } = app;
         const { full_name, password } = testData.user;
@@ -70,8 +69,8 @@ test.describe('assignment_001', () => {
         await cartPage.verifyProductPriceIsMatch(earbudProductName, earbudProductPrice);
         await cartPage.verifyProductPriceIsMatch(keyboardProductName, keyboardProductPrice);
         // 23.	Verify the total price.
-        const totalPrice = convertCurrencyToNumber(earbudProductPrice) + convertCurrencyToNumber(keyboardProductPrice);
-        await cartPage.verifyTotalPriceIsMatch(convertNumberToCurrency(totalPrice));
+        const totalPrice = commonUtils.convertCurrencyToNumber(earbudProductPrice) + commonUtils.convertCurrencyToNumber(keyboardProductPrice);
+        await cartPage.verifyTotalPriceIsMatch(commonUtils.convertNumberToCurrency(totalPrice));
         // 24.	Click “Proceed to Checkout.”
         await cartPage.clickCheckoutButton();
         // 25.	Fill in the delivery address.
