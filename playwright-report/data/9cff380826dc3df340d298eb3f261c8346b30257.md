@@ -1,0 +1,195 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - banner "nav-header-0" [ref=e4]:
+    - generic "nav-div-0" [ref=e5]:
+      - link "nav-a-0" [ref=e6] [cursor=pointer]:
+        - /url: /
+        - img "nav-img-0" [ref=e7]
+        - generic "nav-span-1" [ref=e8]: Doppee Shop
+      - form "nav-form-1" [ref=e9]:
+        - textbox "nav-input-0" [ref=e10]:
+          - /placeholder: Search for anything
+        - button "Search" [ref=e11] [cursor=pointer]:
+          - img "nav-svg-0" [ref=e12]:
+            - generic "nav-path-0" [ref=e13]
+      - navigation "nav-nav-2" [ref=e14]:
+        - link "Cart" [ref=e15] [cursor=pointer]:
+          - /url: /cart
+          - img "nav-svg-0" [ref=e16]:
+            - generic "nav-path-0" [ref=e17]
+        - generic "nav-div-1" [ref=e18]:
+          - button "Sign In" [ref=e19] [cursor=pointer]:
+            - img "nav-svg-0" [ref=e20]:
+              - generic "nav-path-0" [ref=e21]
+            - img [ref=e22]
+        - generic "Language" [ref=e24]:
+          - button "nav-button-0" [ref=e25] [cursor=pointer]:
+            - generic [ref=e26]: 🇺🇸
+            - generic "nav-span-1" [ref=e27]: EN
+            - img [ref=e28]
+  - main [ref=e30]:
+    - generic "home-div-0" [ref=e31]:
+      - region "home-section-0" [ref=e32]:
+        - generic "home-div-0" [ref=e33]:
+          - generic "home-div-0":
+            - generic "home-div-0":
+              - generic "home-div-0":
+                - generic "home-div-0":
+                  - generic "home-div-0": Mega Sale up to 30%
+                  - paragraph: Weekly picks just for you
+                  - generic "home-div-2":
+                    - link "home-a-0":
+                      - /url: /products?q=sale
+                      - text: Shop now
+                    - link "home-a-1":
+                      - /url: /products?q=sale
+                      - text: View all
+                - generic "home-div-1": 🔥
+          - generic "home-div-1" [ref=e34]:
+            - generic "home-div-0" [ref=e35]:
+              - generic "home-div-0" [ref=e36]:
+                - generic "home-div-0" [ref=e37]:
+                  - generic "home-div-0" [ref=e38]: New Arrivals
+                  - paragraph [ref=e39]: Fresh picks in Electronics & more
+                  - generic "home-div-2" [ref=e40]:
+                    - link "home-a-0" [ref=e41] [cursor=pointer]:
+                      - /url: /products?category=Electronics
+                      - text: Explore
+                    - link "home-a-1" [ref=e42] [cursor=pointer]:
+                      - /url: /products?category=Electronics
+                      - text: View all
+                - generic "home-div-1" [ref=e43]: ✨
+          - generic "home-div-2":
+            - generic "home-div-0":
+              - generic "home-div-0":
+                - generic "home-div-0":
+                  - generic "home-div-0": Free Shipping ≥ 1,000 THB
+                  - paragraph: Limited-time offer on selected items
+                  - generic "home-div-2":
+                    - link "home-a-0":
+                      - /url: /products
+                      - text: Start saving
+                    - link "home-a-1":
+                      - /url: /products
+                      - text: View all
+                - generic "home-div-1": 🚚
+        - button "Prev" [ref=e44] [cursor=pointer]: ‹
+        - button "Next" [ref=e45] [cursor=pointer]: ›
+        - generic "home-div-3" [ref=e46]:
+          - button "slide" [ref=e47] [cursor=pointer]
+          - button "slide" [ref=e48] [cursor=pointer]
+          - button "slide" [ref=e49] [cursor=pointer]
+      - region "home-section-1" [ref=e50]:
+        - generic "home-div-0" [ref=e51]:
+          - heading "home-h2-20" [level=2] [ref=e52]: Suggest Product (สินค้าแนะนำ)
+          - link "home-a-1" [ref=e53] [cursor=pointer]:
+            - /url: /products
+            - text: View all
+        - list "home-ul-1" [ref=e54]:
+          - listitem "home-li-0" [ref=e55]:
+            - link "home-a-0" [ref=e56] [cursor=pointer]:
+              - /url: /products/9
+              - img "home-img-0" [ref=e57]
+            - link "home-a-1" [ref=e58] [cursor=pointer]:
+              - /url: /products/9
+              - text: Wireless Mouse
+            - paragraph [ref=e59]: Ergonomic 2.4GHz mouse
+            - generic "home-div-3" [ref=e60]:
+              - generic "home-span-0" [ref=e61]: THB 127.00
+              - link "home-a-1" [ref=e62] [cursor=pointer]:
+                - /url: /products/9
+                - text: View Details
+          - listitem "home-li-1" [ref=e63]:
+            - link "home-a-0" [ref=e64] [cursor=pointer]:
+              - /url: /products/6
+              - img "home-img-0" [ref=e65]
+            - link "home-a-1" [ref=e66] [cursor=pointer]:
+              - /url: /products/6
+              - text: Sunglasses
+            - paragraph [ref=e67]: UV-protection shades
+            - generic "home-div-3" [ref=e68]:
+              - generic "home-span-0" [ref=e69]: THB 161.00
+              - link "home-a-1" [ref=e70] [cursor=pointer]:
+                - /url: /products/6
+                - text: View Details
+          - listitem "home-li-2" [ref=e71]:
+            - link "home-a-0" [ref=e72] [cursor=pointer]:
+              - /url: /products/11
+              - img "home-img-0" [ref=e73]
+            - link "home-a-1" [ref=e74] [cursor=pointer]:
+              - /url: /products/11
+              - text: Ceramic Mug
+            - paragraph [ref=e75]: Matte finish mug
+            - generic "home-div-3" [ref=e76]:
+              - generic "home-span-0" [ref=e77]: THB 91.00
+              - link "home-a-1" [ref=e78] [cursor=pointer]:
+                - /url: /products/11
+                - text: View Details
+          - listitem "home-li-3" [ref=e79]:
+            - link "home-a-0" [ref=e80] [cursor=pointer]:
+              - /url: /products/15
+              - img "home-img-0" [ref=e81]
+            - link "home-a-1" [ref=e82] [cursor=pointer]:
+              - /url: /products/15
+              - text: Hiking Boots
+            - paragraph [ref=e83]: Water-resistant
+            - generic "home-div-3" [ref=e84]:
+              - generic "home-span-0" [ref=e85]: THB 1,284.00
+              - link "home-a-1" [ref=e86] [cursor=pointer]:
+                - /url: /products/15
+                - text: View Details
+          - listitem "home-li-4" [ref=e87]:
+            - link "home-a-0" [ref=e88] [cursor=pointer]:
+              - /url: /products/14
+              - img "home-img-0" [ref=e89]
+            - link "home-a-1" [ref=e90] [cursor=pointer]:
+              - /url: /products/14
+              - text: Canvas Sneakers
+            - paragraph [ref=e91]: Low-top casual
+            - generic "home-div-3" [ref=e92]:
+              - generic "home-span-0" [ref=e93]: THB 1,605.00
+              - link "home-a-1" [ref=e94] [cursor=pointer]:
+                - /url: /products/14
+                - text: View Details
+          - listitem "home-li-5" [ref=e95]:
+            - link "home-a-0" [ref=e96] [cursor=pointer]:
+              - /url: /products/1
+              - img "home-img-0" [ref=e97]
+            - link "home-a-1" [ref=e98] [cursor=pointer]:
+              - /url: /products/1
+              - text: Classic Tee
+            - paragraph [ref=e99]: Soft cotton t-shirt
+            - generic "home-div-3" [ref=e100]:
+              - generic "home-span-0" [ref=e101]: THB 214.00
+              - link "home-a-1" [ref=e102] [cursor=pointer]:
+                - /url: /products/1
+                - text: View Details
+          - listitem "home-li-6" [ref=e103]:
+            - link "home-a-0" [ref=e104] [cursor=pointer]:
+              - /url: /products/5
+              - img "home-img-0" [ref=e105]
+            - link "home-a-1" [ref=e106] [cursor=pointer]:
+              - /url: /products/5
+              - text: Backpack
+            - paragraph [ref=e107]: Slim tech backpack
+            - generic "home-div-3" [ref=e108]:
+              - generic "home-span-0" [ref=e109]: THB 599.00
+              - link "home-a-1" [ref=e110] [cursor=pointer]:
+                - /url: /products/5
+                - text: View Details
+          - listitem "home-li-7" [ref=e111]:
+            - link "home-a-0" [ref=e112] [cursor=pointer]:
+              - /url: /products/7
+              - img "home-img-0" [ref=e113]
+            - link "home-a-1" [ref=e114] [cursor=pointer]:
+              - /url: /products/7
+              - text: Bluetooth Earbuds
+            - paragraph [ref=e115]: Wireless earbuds with charging case
+            - generic "home-div-3" [ref=e116]:
+              - generic "home-span-0" [ref=e117]: THB 213.00
+              - link "home-a-1" [ref=e118] [cursor=pointer]:
+                - /url: /products/7
+                - text: View Details
+```

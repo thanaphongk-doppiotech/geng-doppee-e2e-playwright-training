@@ -1,0 +1,35 @@
+{
+    "sign_up_page": {
+        "full_name": "Full Name"
+    },
+    "product_list_page": {
+        "category": {
+            "electronics": "Electronics"
+        }
+    },
+    "product_detail_page": {
+        "lbl_back_to_product": "Back to products",
+        "lbl_total": "Total",
+        "product": {
+            "attribute": {
+                "color": {
+                    "name": "Color",
+                    "black": "Black",
+                    "white": "White",
+                    "silver": "Silver"
+                }
+            },
+            "price": {
+                "currency": "THB"
+            }
+        }
+    },
+    "cart_page": {
+        "lbl_select_all": "Select all"
+    },
+    "notification_page": {
+        "add_to_cart_success": {
+            "msg": "Added to cart"
+        }
+    }
+}

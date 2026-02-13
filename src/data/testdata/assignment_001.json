@@ -1,0 +1,19 @@
+{
+    "user": {
+        "full_name": "Gengi Playwright",
+        "password": "Doppio123*"
+    },
+    "product": {
+        "category": {
+            "electronics": "Electronics"
+        },
+        "earbud": {
+            "name": "Bluetooth Earbuds"
+        },
+        "keyboard": {
+            "search_keyword": "keyboard",
+            "name": "Mechanical Keyboard",
+            "qty": "5"
+        }
+    }
+}
