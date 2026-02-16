@@ -19,6 +19,11 @@ import { CheckoutService } from '../services/CheckoutService';
 // Utils
 import * as randomUtils from '../utils/RandomUtils';
 import * as commonUtils from '../utils/CommonUtils';
+import * as loginApiUtils from '../utils/LoginApiUtils';
+import * as cartApiUtils from '../utils/CartApiUtils';
+import * as productApiUtils from '../utils/ProductApiUtils';
+import * as addressApiUtils from '../utils/AddressApiUtils';
+import * as orderApiUtils from '../utils/OrderApiUtils';
 
 // Translation
 import { en, th, Translation } from '../data/translations/translation';
@@ -95,6 +100,13 @@ type Fixtures = {
     utils: typeof randomUtils;
     commonUtils: typeof commonUtils;
     translations: Translation;
+    api: {
+        login: typeof loginApiUtils;
+        cart: typeof cartApiUtils;
+        product: typeof productApiUtils;
+        address: typeof addressApiUtils;
+        order: typeof orderApiUtils;
+    };
 }
 
 export const test = base.extend<Fixtures>({
@@ -109,5 +121,14 @@ export const test = base.extend<Fixtures>({
     },
     translations: async ({ }, use) => {
         await use(en);
+    },
+    api: async ({ request }, use) => {
+        await use({
+            login: loginApiUtils,
+            cart: cartApiUtils,
+            product: productApiUtils,
+            address: addressApiUtils,
+            order: orderApiUtils,
+        });
     },
 })
