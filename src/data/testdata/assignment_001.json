@@ -3,6 +3,10 @@
         "full_name": "Gengi Playwright",
         "password": "Doppio123*"
     },
+    "test_user": {
+        "email": "thanaphong.k@doppiotech.com",
+        "password": "Doppio123*"
+    },
     "product": {
         "category": {
             "electronics": "Electronics"
@@ -14,6 +18,10 @@
             "search_keyword": "keyboard",
             "name": "Mechanical Keyboard",
             "qty": "5"
+        },
+        "mouse": {
+            "search_keyword": "mouse",
+            "qty": "1"
         }
     }
 }

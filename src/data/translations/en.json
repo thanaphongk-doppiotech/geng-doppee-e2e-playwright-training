@@ -35,5 +35,8 @@
         "payment_success": {
             "msg": "Payment successful"
         }
+    },
+    "order_confirm_page": {
+        "lbl_placed": "placed"
     }
 }

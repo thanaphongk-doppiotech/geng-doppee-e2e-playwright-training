@@ -1,6 +1,6 @@
-import { test } from '../src/fixtures/app.fixtures';
-import testData from '../src/data/testdata/assignment_001.json';
-import { testAddress } from '../src/data/testdata/assignment_001';
+import { test } from '../../src/fixtures/app.fixtures';
+import testData from '../../src/data/testdata/assignment_001.json';
+import { testAddress } from '../../src/data/testdata/assignment_001';
 
 test.describe('assignment_001', () => {
 
