@@ -16,12 +16,10 @@ test.describe('Assignment API', () => {
             email: testData.test_user.email
         });
         // 2. search product list with (Search + Category) endpoint - example: /api/products?q=mouse&category=Electronics
-        const mouseProductList = await api.product.getProductListByNameAndCategory(apiContext, testData.product.mouse.search_keyword, testData.product.category.electronics);
+        const mouseProductList = await api.product.getAvailableProductListByNameAndCategory(apiContext, testData.product.mouse.search_keyword, testData.product.category.electronics);
         console.log('Mouse product list', JSON.stringify(mouseProductList, null, 2));
-        const availableMouseProducts = api.product.filterAvailableProduct(mouseProductList);
-        console.log('Available mouse product list', JSON.stringify(mouseProductList, null, 2));
         //     a. Get product id from search product endpoint
-        const mouseFirstProductId = availableMouseProducts[0].id;
+        const mouseFirstProductId = mouseProductList[0].id;
         // 3. Get product details - /api/products/${productId}
         const wirelessMouseProductDetails = await api.product.getProductDetailByProductId(apiContext, mouseFirstProductId);
         //     a. Get product id & price in product details
@@ -30,14 +28,17 @@ test.describe('Assignment API', () => {
         // 4. add product to cart
         const informationCart = await api.cart.getCart(apiContext);
         console.log('Information cart', JSON.stringify(informationCart, null, 2));
-        await api.cart.removeAllItem(apiContext, informationCart);
+        const items = informationCart.items ?? [];
+        if (items.length > 0) {
+            await Promise.all(items.map((i: { id: string; }) => api.cart.removeItem(apiContext, i.id)));
+            console.log('Remove all items in cart');
+        }
         await api.cart.addProductById(apiContext, wirelessMouseProductId, testData.product.mouse.qty);
         // 5. search product list with (Search + Category)  endpoint - example : /api/products?q=mouse&category=Electronics
-        const keyboardProductList = await api.product.getProductListByNameAndCategory(apiContext, testData.product.keyboard.search_keyword, testData.product.category.electronics);
-        const availableKeyboardProducts = api.product.filterAvailableProduct(keyboardProductList);
-        console.log('Available keyboard product list', JSON.stringify(availableKeyboardProducts, null, 2));
+        const keyboardProductList = await api.product.getAvailableProductListByNameAndCategory(apiContext, testData.product.keyboard.search_keyword, testData.product.category.electronics);
+        console.log('Available keyboard product list', JSON.stringify(keyboardProductList, null, 2));
         // 6. Get product details number 2 - /api/products/${productId}
-        const mechanicalKeyboardProductDetails = await api.product.getProductDetailByProductId(apiContext, availableKeyboardProducts[0].id);
+        const mechanicalKeyboardProductDetails = await api.product.getProductDetailByProductId(apiContext, keyboardProductList[0].id);
         //     a. Get product id & price in product details
         const mechanicalKeyboardProductId = mechanicalKeyboardProductDetails.product.id;
         const mechanicalKeyboardPrice = mechanicalKeyboardProductDetails.product.price_cents_incl_vat;
@@ -54,10 +55,10 @@ test.describe('Assignment API', () => {
         // 9. create address
         const addressDetails = await api.address.getAddress(apiContext);
         console.log('Address data', JSON.stringify(addressDetails, null, 2));
-        const isAddressEmpty = api.address.verifyAddressIsEmpty(addressDetails);
-        console.log('Is address empty', isAddressEmpty);
-        if (isAddressEmpty) {
-            await api.address.createAddress(apiContext, testAddressApi);
+        const addresses = addressDetails.addresses ?? [];
+        if (addresses.length <= 0) {
+            const createAddressData = await api.address.createAddress(apiContext, testAddressApi);
+            console.log('Create address data response', JSON.stringify(createAddressData, null, 2));
         }
         // 10. place an order - /api/orders/place
         const cartItemIds = informationCartAfter.items.map((i: any) => i.id);

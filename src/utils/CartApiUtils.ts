@@ -18,11 +18,3 @@ export async function addProductById(apiContext: APIRequestContext, productId: s
     expect(res.ok()).toBeTruthy();
     return res.json();
 }
-
-export async function removeAllItem(apiContext: APIRequestContext, cartData: any) {
-    const items = cartData.items ?? [];
-    if (items.length > 0) {
-        await Promise.all(items.map((i: { id: string; }) => removeItem(apiContext, i.id)));
-        console.log('Remove all items in cart');
-    }
-}
