@@ -16,8 +16,8 @@ test.describe('assignment_001', () => {
         const mobilePhone = utils.getRandomMobileNumber();
         // start test case
         // 1.	Register a new account.
-        // await signUpService.registerWithGenerateEmail(full_name, mobilePhone, email, password, password);
-        await loginService.loginWithEmailAndPassword(testData.test_user.email, testData.test_user.password);
+        await signUpService.registerWithGenerateEmail(full_name, mobilePhone, email, password, password);
+        // await loginService.loginWithEmailAndPassword(testData.test_user.email, testData.test_user.password);
         await cartService.removeAllItemInCart();
         await menuBarPage.clickSearchButton();
         // 2.	Apply the filter Electronics.

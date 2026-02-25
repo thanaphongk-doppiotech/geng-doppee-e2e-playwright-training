@@ -7,9 +7,9 @@ export class CartService {
         const { cartPage, menuBarPage, notificationPage } = this.app;
         await menuBarPage.clickCartButton();
         const removeButtonElements = await cartPage.getRemoveButtonElements();
-        const totalButtons = removeButtonElements.count();
-        if (await totalButtons < 1) return;
-        for (let i = 0; i < await totalButtons; i++) {
+        const totalButtons = await removeButtonElements.count();
+        if (totalButtons < 1) return;
+        for (let i = 0; i < totalButtons; i++) {
             removeButtonElements.nth(0).click();
             await cartPage.clickConfirmRemoveButton();
             await notificationPage.clickClosePopup();

@@ -23,8 +23,10 @@ export class CheckoutService {
     async createNewAddressIfEmpty(addressData: AddressData) {
         const { checkoutPage } = this.app;
         const addressRadioElements = await checkoutPage.getAddressElements();
-        const addressRadios = addressRadioElements.count();
-        if (await addressRadios < 1) { this.createNewAddress(addressData); }
+        const addressRadios = await addressRadioElements.count();
+        console.log('addressRadioElements', addressRadioElements);
+        console.log('addressRadios', addressRadios);
+        if (addressRadios < 1) { await this.createNewAddress(addressData); }
     }
 
 }
