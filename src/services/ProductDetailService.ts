@@ -8,7 +8,7 @@ export class ProductDetailService {
     async increaseQuantity(qty: any) {
         const { productDetailPage } = this.app
         const currentQty = await productDetailPage.getProductQuantity();
-        const clicksNeeded = Number(qty) - currentQty;
+        const clicksNeeded = Number(qty) - Number(currentQty);
         for (let i = 0; i < clicksNeeded; i++) {
             await productDetailPage.clickIncreaseQuntityButton();
         }

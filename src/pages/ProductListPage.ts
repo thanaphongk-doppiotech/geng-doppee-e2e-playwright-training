@@ -6,13 +6,14 @@ export class ProductListPage extends BasePage {
     private readonly ddlCategory: Locator;
     private readonly btnApply: Locator;
     private readonly txtSearch: Locator;
-    private readonly btnViewDetailByName = (productName: string): Locator => this.page.locator(`//a[contains(text(), "${productName}")]/parent::div/following-sibling::div/button`);
+    private readonly btnViewDetailByName: (productName: string) => Locator;
 
     constructor(readonly page: Page, readonly translations: Translation) {
         super(page, translations);
         this.ddlCategory = page.getByTestId('products-filter-category');
         this.btnApply = page.locator('#btn-apply-filters');
         this.txtSearch = page.getByTestId('products-search-input');
+        this.btnViewDetailByName = (productName: string): Locator => this.page.locator(`//a[contains(text(), "${productName}")]/parent::div/following-sibling::div/button`);
     }
 
     async selectCategoryByName(categoryName: string) {

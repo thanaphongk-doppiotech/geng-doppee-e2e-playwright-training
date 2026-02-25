@@ -10,13 +10,16 @@ test.describe('assignment_001', () => {
 
     test('Verify new register customer can be purchase product successfully', async ({ app, utils, translations, commonUtils }) => {
         // prepare test data
-        const { menuBarPage, signUpService, productListPage, productDetailPage, productDetailService, notificationPage, cartPage, checkoutPage, checkoutService, orderConfirmPage } = app;
+        const { menuBarPage, signUpService, loginService, cartService, productListPage, productDetailPage, productDetailService, notificationPage, cartPage, checkoutPage, checkoutService, orderConfirmPage } = app;
         const { full_name, password } = testData.user;
         const email = utils.getRandomEmail();
         const mobilePhone = utils.getRandomMobileNumber();
         // start test case
         // 1.	Register a new account.
-        await signUpService.registerWithGenerateEmail(full_name, mobilePhone, email, password, password);
+        // await signUpService.registerWithGenerateEmail(full_name, mobilePhone, email, password, password);
+        await loginService.loginWithEmailAndPassword(testData.test_user.email, testData.test_user.password);
+        await cartService.removeAllItemInCart();
+        await menuBarPage.clickSearchButton();
         // 2.	Apply the filter Electronics.
         await productListPage.selectCategoryByName(translations.product_list_page.category.electronics);
         await productListPage.clickApplyButton();
@@ -25,7 +28,7 @@ test.describe('assignment_001', () => {
         // 4.	Retrieve the product name.
         const earbudProductName = await productDetailPage.getProductName();
         // 5.	Retrieve the product price.
-        const earbudProductPrice = await productDetailPage.getProductTotalPrice();
+        const earbudProductPrice = await productDetailPage.getProductPrice();
         // 6.	Retrieve the product quantity.
         const earbudProductQty = await productDetailPage.getProductQuantity();
         // 7.	Select a color (if required).
@@ -49,7 +52,7 @@ test.describe('assignment_001', () => {
         // 15.	Increase product quantity to 5
         await productDetailService.increaseQuantity(testData.product.keyboard.qty);
         const keyboardProductQty = await productDetailPage.getProductQuantity();
-        const keyboardProductPrice = await productDetailPage.getProductTotalPrice();
+        const keyboardProductPrice = await productDetailPage.getProductPrice();
         // 16.	Select a color (if required).
         await productDetailPage.selectColorByColorName(translations.product_detail_page.product.attribute.color.silver);
         // 17.	Click Add to Cart.
@@ -66,15 +69,18 @@ test.describe('assignment_001', () => {
         await cartPage.verifyProductQuantityIsMatch(earbudProductName, earbudProductQty);
         await cartPage.verifyProductQuantityIsMatch(keyboardProductName, keyboardProductQty);
         // 22.	Verify the product price.
-        await cartPage.verifyProductPriceIsMatch(earbudProductName, earbudProductPrice);
-        await cartPage.verifyProductPriceIsMatch(keyboardProductName, keyboardProductPrice);
+        const earbudTotalPrice = Number(earbudProductPrice) * Number(earbudProductQty);
+        const keyboardTotalPrice = Number(keyboardProductPrice) * Number(keyboardProductQty);
+        await cartPage.verifyProductPriceIsMatch(earbudProductName, commonUtils.convertNumberToCurrency(earbudTotalPrice));
+        await cartPage.verifyProductPriceIsMatch(keyboardProductName, commonUtils.convertNumberToCurrency(keyboardTotalPrice));
         // 23.	Verify the total price.
-        const totalPrice = commonUtils.convertCurrencyToNumber(earbudProductPrice) + commonUtils.convertCurrencyToNumber(keyboardProductPrice);
-        await cartPage.verifyTotalPriceIsMatch(commonUtils.convertNumberToCurrency(totalPrice));
+        const shippingPrice = await cartPage.getShippingPrice();
+        const actualTotalPrice = earbudTotalPrice + keyboardTotalPrice + Number(shippingPrice);
+        await cartPage.verifyTotalPriceIsMatch(commonUtils.convertNumberToCurrency(actualTotalPrice));
         // 24.	Click “Proceed to Checkout.”
         await cartPage.clickCheckoutButton();
         // 25.	Fill in the delivery address.
-        await checkoutService.createNewAddress(testAddress);
+        await checkoutService.createNewAddressIfEmpty(testAddress);
         // 26.	Select QR Code as the payment method.
         await checkoutPage.selectQrCodePayment();
         await checkoutPage.clickPlaceOrderButton();

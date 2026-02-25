@@ -17,7 +17,7 @@ export class SignUpPage extends BasePage {
         this.txtEmail = page.getByTestId('signup-email');
         this.txtPassword = page.getByTestId('signup-password');
         this.txtConfirmPassword = page.getByTestId('signup-confirm');
-        // this.btnCreateAccount = page.getByRole('button', { name: 'Create account' });
+        this.btnCreateAccount = page.getByRole('button', { name: 'Create account' });
         this.btnCreateAccount = page.getByTestId('signup-submit');
     }
 

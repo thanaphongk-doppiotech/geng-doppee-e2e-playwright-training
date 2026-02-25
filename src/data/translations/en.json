@@ -26,6 +26,7 @@
     },
     "cart_page": {
         "lbl_select_all": "Select all",
+        "lbl_shipping": "Shipping",
         "lbl_total": "Total"
     },
     "notification_page": {

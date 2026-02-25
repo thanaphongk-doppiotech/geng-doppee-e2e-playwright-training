@@ -9,7 +9,8 @@ export class ProductDetailPage extends BasePage {
     private readonly btnAddToCart: Locator;
     private readonly btnBackToProduct: Locator;
     private readonly btnIncreaseQuantity: Locator;
-    private readonly btnColorAttributeByName = (name: string): Locator => this.page.locator(`//label[text()="${this.translations.product_detail_page.product.attribute.color.name}"]/parent::div//button[text()="${name}"]`);
+    private readonly btnColorAttributeByName: (attrName: string) => Locator;
+    private readonly lblProductPrice: Locator;
 
     constructor(readonly page: Page, readonly translations: Translation) {
         super(page, translations);
@@ -20,8 +21,10 @@ export class ProductDetailPage extends BasePage {
         this.btnBackToProduct = page.locator(`//a[@href="/products" and contains(text(), "${this.translations.product_detail_page.lbl_back_to_product}")]`);
         // FIXME
         // - getByRole not work?
-        // // this.btnBackToProduct = page.getByRole('link', { name: `${this.translations.product_detail_page.lbl_back_to_product}`, exact: false });
+        // this.btnBackToProduct = page.getByRole('link', { name: this.translations.product_detail_page.lbl_back_to_product});
         this.btnIncreaseQuantity = page.getByTestId('pd-qty-inc');
+        this.btnColorAttributeByName = (attrName: string) => this.page.locator(`//label[text()="${this.translations.product_detail_page.product.attribute.color.name}"]/parent::div//button[text()="${attrName}"]`);
+        this.lblProductPrice = page.locator('[data-testid="productdetail-price"]');
     }
 
     async getProductName() {
@@ -30,7 +33,13 @@ export class ProductDetailPage extends BasePage {
     }
 
     async getProductTotalPrice() {
-        const priceText = await this.txtProductTotalPrice.innerText();
+        const totalPriceText = await this.txtProductTotalPrice.innerText();
+        const totalPrice = totalPriceText.replace(`${this.translations.product_detail_page.product.price.currency}`, '').trim();
+        return totalPrice;
+    }
+
+    async getProductPrice() {
+        const priceText = await this.lblProductPrice.innerText();
         const price = priceText.replace(`${this.translations.product_detail_page.product.price.currency}`, '').trim();
         return price;
     }
@@ -40,8 +49,8 @@ export class ProductDetailPage extends BasePage {
         return qty;
     }
 
-    async selectColorByColorName(name: string) {
-        await this.btnColorAttributeByName(name).click();
+    async selectColorByColorName(colorName: string) {
+        await this.btnColorAttributeByName(colorName).click();
     }
 
     async clickAddToCartButton() {

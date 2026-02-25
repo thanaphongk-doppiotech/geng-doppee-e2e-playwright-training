@@ -13,8 +13,8 @@ export class CheckoutPage extends BasePage {
     private readonly btnSaveAddress: Locator;
     private readonly chkQrCodePay: Locator;
     private readonly btnPlaceOrder: Locator;
-
-    private readonly txtProductName = (name: string): Locator => this.page.locator(`//div[contains(text(), "${name}")]`);
+    private readonly txtProductName: (name: string) => Locator;
+    private readonly rdoAddressList: Locator;
 
     constructor(readonly page: Page, readonly translations: Translation) {
         super(page, translations);
@@ -28,6 +28,8 @@ export class CheckoutPage extends BasePage {
         this.btnSaveAddress = page.getByTestId('checkout-form-save');
         this.chkQrCodePay = page.getByTestId('checkout-pay-qr');
         this.btnPlaceOrder = page.getByTestId('checkout-place-order');
+        this.txtProductName = (productName: string): Locator => this.page.locator(`//div[contains(text(), "${productName}")]`);
+        this.rdoAddressList = page.locator('li[data-testid^="checkout-address-"]');
     }
 
     async clickAddNewAddress() {
@@ -81,4 +83,9 @@ export class CheckoutPage extends BasePage {
     async clickPlaceOrderButton() {
         await this.btnPlaceOrder.click();
     }
+
+    async getAddressElements() {
+        return this.rdoAddressList;
+    }
+
 }

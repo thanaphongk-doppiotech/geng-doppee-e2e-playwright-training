@@ -19,4 +19,12 @@ export class CheckoutService {
         checkoutPage.clickSaveAddressButton();
         await checkoutPage.page.waitForTimeout(500);
     }
+
+    async createNewAddressIfEmpty(addressData: AddressData) {
+        const { checkoutPage } = this.app;
+        const addressRadioElements = await checkoutPage.getAddressElements();
+        const addressRadios = addressRadioElements.count();
+        if (await addressRadios < 1) { this.createNewAddress(addressData); }
+    }
+
 }

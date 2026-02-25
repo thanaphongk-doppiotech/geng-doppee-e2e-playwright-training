@@ -13,8 +13,10 @@ import { OrderConfirmPage } from '../pages/OrderConfirmPage';
 
 // Services
 import { SignUpService } from '../services/SignUpService';
+import { LoginService } from '../services/LoginService';
 import { ProductDetailService } from '../services/ProductDetailService';
 import { CheckoutService } from '../services/CheckoutService';
+import { CartService } from '../services/CartService';
 
 // Utils
 import * as randomUtils from '../utils/RandomUtils';
@@ -40,8 +42,10 @@ export class App {
     private _orderConfirmPage?: OrderConfirmPage;
 
     private _signupService?: SignUpService;
+    private _loginService?: LoginService;
     private _productDetailService?: ProductDetailService;
     private _checkoutService?: CheckoutService;
+    private _cartService?: CartService;
 
     constructor(readonly page: Page, readonly translations: Translation) {
     }
@@ -86,12 +90,20 @@ export class App {
         return this._signupService ??= new SignUpService(this);
     }
 
+    get loginService(): LoginService {
+        return this._loginService ??= new LoginService(this);
+    }
+
     get productDetailService(): ProductDetailService {
         return this._productDetailService ??= new ProductDetailService(this);
     }
 
     get checkoutService(): CheckoutService {
         return this._checkoutService ??= new CheckoutService(this);
+    }
+
+    get cartService(): CartService {
+        return this._cartService ??= new CartService(this);
     }
 }
 
