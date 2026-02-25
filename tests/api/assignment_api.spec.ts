@@ -65,6 +65,7 @@ test.describe('Assignment API', () => {
         const orderPlaceData = await api.order.placeOrder(apiContext, cartItemIds);
         console.log('Place order data', JSON.stringify(orderPlaceData, null, 2));
         //     a. Verify total of cart - Actual
+        // FIXME missing shipping price!
         expect.soft(orderPlaceData.order.total_incl_vat_cents).toEqual(actualTotalPrice);
         //     b. Verify status should be ‘ placed ‘
         expect(orderPlaceData.order.status).toBe(translations.order_confirm_page.lbl_placed);
